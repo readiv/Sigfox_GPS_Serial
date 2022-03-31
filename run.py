@@ -3,7 +3,7 @@ import serial.tools.list_ports
 import time 
 
 MySerial = "COM5"             # Открытый последовательный порт
-MyBPS = 9600
+MyBPS = 4800
 Mytimeout = 1
 
 def  open_port(port, bps, timex):
@@ -65,13 +65,21 @@ if __name__ == "__main__":
         print("--- Ошибка открытия последовательного порта---")
         sys.exit()
 
-    send_to_port(ser, "AT+VER") 
+    # send_to_port(ser, "AT+VER") 
+    # answer = read_from_port(ser)
+    # print(answer)
+
+    send_to_port(ser, "$GNRMC,165456.517,A,4103.7095,N,00101.5054,E,2.08,0.00,250621,,,A*77") 
     answer = read_from_port(ser)
     print(answer)
 
-    send_to_port(ser, "AT$ID") 
-    answer = read_from_port(ser)
-    print(answer)
+    # send_to_port(ser, "AT$LED=1") 
+    # answer = read_from_port(ser)
+    # print(answer)
+
+    # send_to_port(ser, "AT$TIM=1") 
+    # answer = read_from_port(ser)
+    # print(answer)
 
     close_port(ser)
     

@@ -1,6 +1,6 @@
 import sys,serial
 import serial.tools.list_ports
-import time 
+from time import sleep
 
 MySerial = "COM5"             # Открытый последовательный порт
 MyBPS = 4800
@@ -65,21 +65,38 @@ if __name__ == "__main__":
         print("--- Ошибка открытия последовательного порта---")
         sys.exit()
 
-    # send_to_port(ser, "AT+VER") 
+    # line_time_old = None
+    # with open('cambrils.txt', 'r') as f:
+    #     for line in f:
+    #         # line = line.split("]")
+    #         line_time = 60*60*1000*int(line[1:3]) + 60*1000*int(line[4:6]) + 1000*int(line[7:9]) + int(line[10:13]) #часы
+    #         if line_time_old is None:
+    #             line_time_old = line_time
+    #         cmd = line.split("]")[1].replace("\n", "").replace("\r", "")
+    #         # sleep((line_time - line_time_old)/1000)
+
+    #         send_to_port(ser, cmd) 
+    #         answer = read_from_port(ser)
+    #         print(answer)
+
+    #         line_time_old = line_time
+
+  
+    # send_to_port(ser, "$GNRMC,165456.517,A,4103.7095,N,00101.5054,E,2.08,0.00,250621,,,A*77") 
     # answer = read_from_port(ser)
     # print(answer)
 
-    send_to_port(ser, "$GNRMC,165456.517,A,4103.7095,N,00101.5054,E,2.08,0.00,250621,,,A*77") 
+    send_to_port(ser, "AT$LED=1") 
     answer = read_from_port(ser)
     print(answer)
 
-    # send_to_port(ser, "AT$LED=1") 
-    # answer = read_from_port(ser)
-    # print(answer)
+    send_to_port(ser, "AT$TIM=0") 
+    answer = read_from_port(ser)
+    print(answer)
 
-    # send_to_port(ser, "AT$TIM=1") 
-    # answer = read_from_port(ser)
-    # print(answer)
+    send_to_port(ser, "AT$SB=1") 
+    answer = read_from_port(ser)
+    print(answer)
 
     close_port(ser)
     
